@@ -1,10 +1,8 @@
 // App.jsx
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import './App.css';
-import Navbar from './components/Navbar.jsx';
+import {Navbar} from "./components/Navbar.jsx"
 import {Home} from "./pages/home/home.jsx"
-
 function App() {
   return (
     <Router>
@@ -13,8 +11,6 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} /> {/* Home component for the home page */}
       </Routes>
-
-    
     </Router>
   );
 }

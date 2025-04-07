@@ -7,7 +7,7 @@ class School(models.Model):
 
     def __str__(self):
         return self.name
-
+g
 
 class Student(models.Model):
     school = models.ForeignKey(School, on_delete=models.CASCADE)
