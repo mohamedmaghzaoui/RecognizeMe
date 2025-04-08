@@ -8,7 +8,8 @@ export const Calendar=()=> {
     {
       title: 'Mathématiques',
       start: '2025-04-10T09:00:00',
-      end: '2025-04-10T10:30:00'
+      end: '2025-04-10T10:30:00',
+      
     },
     {
       title: 'Physique',

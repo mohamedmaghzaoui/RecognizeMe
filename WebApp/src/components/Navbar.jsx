@@ -22,7 +22,7 @@ export const Navbar=()=>{
               <Link className='nav-link' to={"/"}>Accueil</Link>
             </li>
             <li className="nav-item">
-              <Link className='nav-link' to={"/classes"}>Classes</Link>
+              <Link className='nav-link' to={"/profile"}>Profile</Link>
             </li>
             <li className="nav-item offset-10">
             <button onClick={()=>setIsLogin(true)} className='btn btn-primary '>Connexion</button>
