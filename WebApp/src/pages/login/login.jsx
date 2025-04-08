@@ -1,9 +1,15 @@
+import { useState } from "react";
+import "./login.css";
 
+export const Login = ({setIsLogin}) => { //props to show hide login popup
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-import "./login.css"
-export const Login = () => {
-
-
+  const loginUser = (e) => {
+    e.preventDefault(); // prevent form refresh
+    const userData = { email, password };
+    console.log("Login Data:", userData);
+  };
 
   return (
     <div className="overlay">
@@ -16,41 +22,40 @@ export const Login = () => {
               alt=""
             />
           </div>
-          <form className="col">
-          <button className="btn btn-danger col-3  offset-9">Close</button>
+          <form className="col" onSubmit={loginUser}>
+          {/* hide login pop ups*/}
+            <button  onClick={()=>{setIsLogin(false)}} className="btn btn-danger col-3 offset-9">
+              Close
+            </button>
             <div className="row">
-           
               <h1 className="text-center text-primary my-3 col">Login</h1>
-          
             </div>
 
             <div className="mb-3">
-              <label htmlFor="exampleFormControlInput1" className="form-label">
-                Email address
-              </label>
+              <label className="form-label">Email address</label>
               <input
+                onChange={(e) => setEmail(e.target.value)}
+                required
                 type="email"
                 className="form-control"
-                id="exampleFormControlInput1"
                 placeholder="Email"
-               
               />
-            
             </div>
+
             <div className="mb-3">
-              <label htmlFor="exampleFormControlInput2" className="form-label">
-                Password
-              </label>
+              <label className="form-label">Password</label>
               <input
+                onChange={(e) => setPassword(e.target.value)}
+                required
                 type="password"
                 className="form-control"
-                id="exampleFormControlInput2"
                 placeholder="Password"
-               
               />
-             
             </div>
-            <button className="btn btn-primary col-10 offset-1">Login</button>
+
+            <button type="submit" className="btn btn-primary col-10 offset-1">
+              Login
+            </button>
           </form>
         </div>
       </div>

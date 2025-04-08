@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { Login } from '../pages/login/login';
 import { SignUp } from '../pages/signUp/signUp';
 export const Navbar=()=>{
+    //login and sign pop ups states
     const [isLogin,setIsLogin]= useState(false)
     const [isSignUp,setIsSignUp]=useState(false)
     
@@ -48,8 +49,8 @@ export const Navbar=()=>{
       </form>
     </div>
   </div>
-  {isLogin && <Login/>}
-  {isSignUp && <SignUp/>}
+  {isLogin && <Login setIsLogin={setIsLogin}/>}
+  {isSignUp && <SignUp setIsSignUp={setIsSignUp}/>}
 </nav>
   );
 }

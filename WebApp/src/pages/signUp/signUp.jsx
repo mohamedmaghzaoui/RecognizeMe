@@ -1,5 +1,26 @@
-import "./../login/login.css"
-export const SignUp = () => {
+import { useState } from "react";
+import "./../login/login.css";
+
+export const SignUp = ({setIsSignUp}) => {
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+    firstName: "",
+    lastName: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSignUp = (e) => {
+    e.preventDefault(); // prevent page refresh
+    console.log("Form Data:", formData);
+  };
+
   return (
     <div className="overlay">
       <div className="content col-6">
@@ -11,67 +32,66 @@ export const SignUp = () => {
               alt=""
             />
           </div>
-          <form className="col">
-          <button className="btn btn-danger col-3  offset-9">Close</button>
+          <form className="col" onSubmit={handleSignUp}>
+          {/*  hide sign up pop up*/}
+            <button onClick={()=>setIsSignUp(false)} type="button" className="btn btn-danger col-3 offset-9">
+              Close
+            </button>
             <div className="row">
-           
-              <h1 className="text-center text-primary my-3 col">Inscription</h1>
-          
+              <h1 className="text-center text-success my-3 col">Inscription</h1>
             </div>
 
             <div className="mb-3">
-              <label htmlFor="exampleFormControlInput1" className="form-label">
-                Email address
-              </label>
+              <label className="form-label">Email address</label>
               <input
                 type="email"
                 className="form-control"
-                id="exampleFormControlInput1"
+                name="email"
                 placeholder="Email"
-               
+                value={formData.email}
+                onChange={handleChange}
               />
-            
             </div>
+
             <div className="mb-3">
-              <label htmlFor="exampleFormControlInput2" className="form-label">
-                Password
-              </label>
+              <label className="form-label">Password</label>
               <input
                 type="password"
                 className="form-control"
-                id="exampleFormControlInput2"
+                name="password"
                 placeholder="Password"
-               
+                value={formData.password}
+                onChange={handleChange}
               />
-             
             </div>
+
             <div className="mb-3">
-              <label htmlFor="exampleFormControlInput2" className="form-label">
-                FirstName
-              </label>
+              <label className="form-label">First Name</label>
               <input
-                type="password"
+                type="text"
                 className="form-control"
-                id="exampleFormControlInput2"
-                placeholder="Password"
-               
+                name="firstName"
+                placeholder="First Name"
+                value={formData.firstName}
+                onChange={handleChange}
               />
-             
             </div>
+
             <div className="mb-3">
-              <label htmlFor="exampleFormControlInput2" className="form-label">
-                Lastname
-              </label>
+              <label className="form-label">Last Name</label>
               <input
-                type="password"
+                type="text"
                 className="form-control"
-                id="exampleFormControlInput2"
-                placeholder="Password"
-               
+                name="lastName"
+                placeholder="Last Name"
+                value={formData.lastName}
+                onChange={handleChange}
               />
-             
             </div>
-            <button className="btn btn-success col-10 offset-1">Sign Up</button>
+
+            <button type="submit" className="btn btn-success col-10 offset-1">
+              Sign Up
+            </button>
           </form>
         </div>
       </div>
