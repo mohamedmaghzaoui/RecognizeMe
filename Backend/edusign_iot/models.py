@@ -1,5 +1,7 @@
 from django.db import models
 
+# Create your models here.
+
 class School(models.Model):
     name = models.CharField(max_length=100)
     address = models.CharField(max_length=255, blank=True, null=True)
@@ -7,7 +9,7 @@ class School(models.Model):
 
     def __str__(self):
         return self.name
-g
+
 
 class Student(models.Model):
     school = models.ForeignKey(School, on_delete=models.CASCADE)
