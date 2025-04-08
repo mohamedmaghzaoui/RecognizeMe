@@ -50,7 +50,7 @@ export const Login = () => {
               />
              
             </div>
-
+            <button className="btn btn-primary col-10 offset-1">Login</button>
           </form>
         </div>
       </div>

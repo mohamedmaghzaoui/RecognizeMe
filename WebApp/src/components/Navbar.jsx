@@ -3,8 +3,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import { useState } from 'react';
 import { Login } from '../pages/login/login';
+import { SignUp } from '../pages/signUp/signUp';
 export const Navbar=()=>{
     const [isLogin,setIsLogin]= useState(false)
+    const [isSignUp,setIsSignUp]=useState(false)
+    
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
   <div className="container-fluid"> 
@@ -34,7 +37,7 @@ export const Navbar=()=>{
         <li className="nav-item offset-10">
         <button onClick={()=>setIsLogin(true)} className='btn btn-primary '>Connexion</button>
         </li>
-        <li className="nav-item mx-5">
+        <li onClick={()=>setIsSignUp(true)} className="nav-item mx-5">
         <button className='btn btn-success '>Inscription</button>
         </li>
        
@@ -46,6 +49,7 @@ export const Navbar=()=>{
     </div>
   </div>
   {isLogin && <Login/>}
+  {isSignUp && <SignUp/>}
 </nav>
   );
 }
