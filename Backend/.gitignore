@@ -1,1 +1,25 @@
+# Python cache
+__pycache__/
+*.pyc
+
+# Virtual environment
+venv/
 .env
+
+# Django database
+db.sqlite3
+
+# Django migrations
+*/migrations/
+!*/migrations/__init__.py
+
+# Media and static (local)
+media/
+static/
+
+# IDE/editor files
+.vscode/
+.idea/
+
+# OS junk
+.DS_Store
