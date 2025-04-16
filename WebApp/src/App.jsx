@@ -7,6 +7,7 @@ import { Profile } from './pages/profile/profile.jsx';
 function App() {
   return (
     <Router>
+    
       <Navbar />  
       {/* Define Routes here */}
       <Routes>

@@ -5,8 +5,8 @@ export const SignUp = ({setIsSignUp}) => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
-    firstName: "",
-    lastName: "",
+    password2: "",
+    school: "",
   });
 
   const handleChange = (e) => {
@@ -66,19 +66,19 @@ export const SignUp = ({setIsSignUp}) => {
             </div>
 
             <div className="mb-3">
-              <label className="form-label">First Name</label>
+              <label className="form-label">Repeat Password</label>
               <input
                 type="text"
                 className="form-control"
                 name="firstName"
-                placeholder="First Name"
-                value={formData.firstName}
+                placeholder="Repeat Password"
+                value={formData.password2}
                 onChange={handleChange}
               />
             </div>
 
             <div className="mb-3">
-              <label className="form-label">Last Name</label>
+              <label className="form-label">School</label>
               <input
                 type="text"
                 className="form-control"
@@ -87,6 +87,13 @@ export const SignUp = ({setIsSignUp}) => {
                 value={formData.lastName}
                 onChange={handleChange}
               />
+            </div>
+            <div className="mb-3">
+              <label className="form-label">Role</label>
+             <select className="form-control" name="" id="">
+              <option value="student">Étudiant</option>
+              <option value="teacher">Prof</option>
+             </select>
             </div>
 
             <button type="submit" className="btn btn-success col-10 offset-1">

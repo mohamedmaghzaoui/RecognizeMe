@@ -24,7 +24,7 @@ export const Calendar=()=> {
   ];
 
   return (
-    <div className="p-4">
+    <div className="p-4 ">
       <h2>Emploi du temps</h2>
       <FullCalendar
         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
