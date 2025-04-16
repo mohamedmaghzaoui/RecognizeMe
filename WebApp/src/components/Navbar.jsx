@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 import { useState } from 'react';
 import { Login } from '../pages/login/login';
-import { SignUp } from '../pages/signUp/signUp';
+import { SignUpPopUp } from '../pages/signUp/signPopUp';
 export const Navbar=()=>{
     //login and sign pop ups states
     const [isLogin,setIsLogin]= useState(false)
@@ -38,7 +38,7 @@ export const Navbar=()=>{
     </div>
   </div>
   {isLogin && <Login setIsLogin={setIsLogin} />}
-  {isSignUp && <SignUp setIsSignUp={setIsSignUp} />}
+  {isSignUp && <SignUpPopUp setIsSignUp={setIsSignUp} />}
 </nav>
 
   );
