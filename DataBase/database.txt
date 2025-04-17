@@ -1,0 +1,87 @@
+User (
+  id              UUID / INT (PK)
+  username        VARCHAR UNIQUE
+  email           VARCHAR UNIQUE
+  password        VARCHAR (hashed)
+  first_name      VARCHAR
+  last_name       VARCHAR
+  role            ENUM('admin', 'teacher', 'student')
+  date_joined     DATETIME
+)
+
+School (
+  id              UUID / INT (PK)
+  name            VARCHAR UNIQUE
+  address         TEXT
+  created_at      DATETIME
+)
+
+Classroom (
+  id              UUID / INT (PK)
+  name            VARCHAR
+  school_id       FK → School(id)
+  teacher_id      FK → User(id)   -- role = teacher
+)
+
+Classroom (
+  id              UUID / INT (PK)
+  name            VARCHAR
+  school_id       FK → School(id)
+  teacher_id      FK → User(id)   -- role = teacher
+)
+Session (
+  id              UUID / INT (PK)
+  classroom_id    FK → Classroom(id)
+  teacher_id      FK → User(id)   -- role = teacher
+  subject         VARCHAR
+  date            DATE
+  start_time      TIME
+  end_time        TIME
+  created_at      DATETIME
+)
+
+StudentSessionToken (
+  id              UUID / INT (PK)
+  student_id      FK → User(id)
+  session_id      FK → Session(id)
+  token           VARCHAR (UUID / secure hash)
+  expires_at      DATETIME
+  created_at      DATETIME
+)
+
+Attendance (
+  id              UUID / INT (PK)
+  student_id      FK → User(id)   -- role = student
+  session_id      FK → Session(id)
+  status          ENUM('present', 'late', 'absent')
+  timestamp       DATETIME        -- when student scanned QR
+)
+
+Justification (
+  id              UUID / INT (PK)
+  attendance_id   FK → Attendance(id)
+  student_id      FK → User(id)
+  reason          TEXT
+  file_upload     VARCHAR (file path or URL)
+  status          ENUM('pending', 'accepted', 'rejected')
+  submitted_at    DATETIME
+)
+
+ScanLog (
+  id              UUID / INT (PK)
+  session_id      FK → Session(id)
+  student_id      FK → User(id)
+  user_agent      TEXT
+  ip_address      VARCHAR
+  scanned_at      DATETIME
+)
+
+Announcement (
+  id              UUID / INT (PK)
+  sender_id       FK → User(id)
+  classroom_id    FK → Classroom(id)
+  title           VARCHAR
+  message         TEXT
+  sent_at         DATETIME
+)
+be carreful ea
