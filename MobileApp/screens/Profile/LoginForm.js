@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, Button } from 'react-native';
 import styles from './styles';
 
-export default function LoginForm() {
+export default function LoginForm({ navigation }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -11,7 +11,7 @@ export default function LoginForm() {
   };
 
   return (
-    <View>
+    <View style={{ padding: 20 }}>
       <Text style={styles.title}>Connexion</Text>
       <TextInput
         style={styles.input}
@@ -29,6 +29,12 @@ export default function LoginForm() {
         secureTextEntry
       />
       <Button title="Se connecter" onPress={handleLogin} />
+      <View style={{ marginTop: 10 }}>
+        <Button
+          title="Pas de compte ? S'inscrire"
+          onPress={() => navigation.navigate('Inscription')}
+        />
+      </View>
     </View>
   );
 }
