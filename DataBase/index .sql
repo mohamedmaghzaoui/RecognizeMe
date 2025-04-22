@@ -31,11 +31,14 @@ CREATE TABLE classrooms (
 -- 4. StudentProfile
 CREATE TABLE student_profiles (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT UNIQUE,
-    classroom_id INT,
+    user_id INT UNIQUE,               -- Foreign key to the User table (to link with the student user)
+    classroom_id INT,                 -- Foreign key to the Classroom table (where the student belongs)
+    school_id INT,                    -- Foreign key to the School table (which school the student is associated with)
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
-    FOREIGN KEY (classroom_id) REFERENCES classrooms(id) ON DELETE SET NULL
+    FOREIGN KEY (classroom_id) REFERENCES classrooms(id) ON DELETE SET NULL,
+    FOREIGN KEY (school_id) REFERENCES schools(id) ON DELETE SET NULL
 );
+
 
 -- 5. Session
 CREATE TABLE sessions (

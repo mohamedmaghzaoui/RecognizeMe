@@ -10,3 +10,4 @@ class Classroom(models.Model):
     name = models.CharField(max_length=100)
     school = models.ForeignKey(School, on_delete=models.SET_NULL, null=True)
     teacher = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, limit_choices_to={'role': 'teacher'})
+

@@ -1,4 +1,4 @@
-User (
+## User (
   id              UUID / INT (PK)
   username        VARCHAR UNIQUE
   email           VARCHAR UNIQUE
@@ -8,28 +8,42 @@ User (
   role            ENUM('admin', 'teacher', 'student')
   date_joined     DATETIME
 )
+## StudentProfile (
+  id              UUID / INT (PK)
+  user_id        FK → User(id)
+  classroom_id   FK → Classroom(id)
+  school         FK → School(id)
 
-School (
+)
+## TeacherProfile (
+  id              UUID / INT (PK)
+  user_id        FK → User(id)
+  school         FK → School(id)
+
+)
+## AdminProfile (
+  id              UUID / INT (PK)
+  user_id        FK → User(id)
+  school         FK → School(id)
+
+)
+
+## School (
   id              UUID / INT (PK)
   name            VARCHAR UNIQUE
   address         TEXT
   created_at      DATETIME
 )
 
-Classroom (
+## Classroom (
   id              UUID / INT (PK)
   name            VARCHAR
   school_id       FK → School(id)
   teacher_id      FK → User(id)   -- role = teacher
 )
 
-Classroom (
-  id              UUID / INT (PK)
-  name            VARCHAR
-  school_id       FK → School(id)
-  teacher_id      FK → User(id)   -- role = teacher
-)
-Session (
+
+## Session (
   id              UUID / INT (PK)
   classroom_id    FK → Classroom(id)
   teacher_id      FK → User(id)   -- role = teacher
@@ -40,7 +54,7 @@ Session (
   created_at      DATETIME
 )
 
-StudentSessionToken (
+ ## StudentSessionToken (
   id              UUID / INT (PK)
   student_id      FK → User(id)
   session_id      FK → Session(id)
@@ -49,7 +63,7 @@ StudentSessionToken (
   created_at      DATETIME
 )
 
-Attendance (
+## Attendance (
   id              UUID / INT (PK)
   student_id      FK → User(id)   -- role = student
   session_id      FK → Session(id)
@@ -57,7 +71,7 @@ Attendance (
   timestamp       DATETIME        -- when student scanned QR
 )
 
-Justification (
+## Justification (
   id              UUID / INT (PK)
   attendance_id   FK → Attendance(id)
   student_id      FK → User(id)
@@ -67,7 +81,7 @@ Justification (
   submitted_at    DATETIME
 )
 
-ScanLog (
+## ScanLog (
   id              UUID / INT (PK)
   session_id      FK → Session(id)
   student_id      FK → User(id)
@@ -76,7 +90,7 @@ ScanLog (
   scanned_at      DATETIME
 )
 
-Announcement (
+## Announcement (
   id              UUID / INT (PK)
   sender_id       FK → User(id)
   classroom_id    FK → Classroom(id)
@@ -84,4 +98,3 @@ Announcement (
   message         TEXT
   sent_at         DATETIME
 )
-be carreful ea
