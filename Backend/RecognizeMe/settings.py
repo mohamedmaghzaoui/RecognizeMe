@@ -31,9 +31,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+
     # Third-party
     'rest_framework',
     'rest_framework.authtoken',
+    'corsheaders',
 
     # Local apps
     'accounts',
@@ -41,7 +43,16 @@ INSTALLED_APPS = [
     'class_sessions',
     'attendance',
     'announcements',
+
 ]
+# Allow all origins (CORS)
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:5173',  
+]
+CORS_ALLOW_CREDENTIALS = True
+
+
+
 
 
 
@@ -115,6 +126,7 @@ REST_FRAMEWORK = {
 }
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',

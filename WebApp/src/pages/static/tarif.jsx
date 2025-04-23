@@ -71,7 +71,7 @@ export const Tarif = () => {
       </section>
 
       {/* CTA */}
-      <section className="text-center mt-5">
+      <section className="text-center mt-5 my-4">
         <h2>Besoin d’un plan personnalisé ?</h2>
         <p>Contactez notre équipe pour un devis adapté à vos besoins spécifiques.</p>
         <button className="btn btn-outline-primary">Nous contacter</button>
