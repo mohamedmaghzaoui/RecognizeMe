@@ -1,7 +1,7 @@
 from django.contrib.auth import authenticate, login, logout
 from rest_framework import status, generics
 from rest_framework.response import Response
-from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.permissions import AllowAny, IsAuthenticated,IsAdminUser
 from django.contrib.auth import get_user_model
 from .serializers import RegisterSerializer, UserSerializer
 import logging
@@ -36,11 +36,20 @@ class LoginView(generics.GenericAPIView):
 
         return Response({'error': 'Invalid credentials'}, status=status.HTTP_400_BAD_REQUEST)
 
-# Users list
+# get all Users 
 class UserListView(generics.ListAPIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAdminUser]
     queryset = get_user_model().objects.all()
     serializer_class = UserSerializer
+# return authenticated user
+class UserView(generics.RetrieveAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class=UserSerializer
+    def get_object(self):
+        return self.request.user
+    
+
+
 
 class LogoutView(generics.GenericAPIView):
     permission_classes = [IsAuthenticated]
