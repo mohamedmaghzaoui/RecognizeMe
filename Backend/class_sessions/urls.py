@@ -1,7 +1,11 @@
-from django.urls import path
-from .views import ClassSessionListCreate, ClassSessionDetail
+from rest_framework.routers import DefaultRouter
+from .views import SessionViewSet
+from django.urls import path, include
 
+router = DefaultRouter()
+router.register(r'sessions', SessionViewSet, basename='sessions')
+
+urlpatterns = router.urls
 urlpatterns = [
-    path('', ClassSessionListCreate.as_view(), name='class-session-list'),  # Liste des sessions de classe
-    path('<int:pk>/', ClassSessionDetail.as_view(), name='class-session-detail'),  # Détail d'une session
+    path('', include(router.urls)),  # Include the router's URL patterns
 ]

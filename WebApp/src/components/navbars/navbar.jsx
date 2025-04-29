@@ -9,7 +9,6 @@ export const Navbar = () => {
     const { user, loading,logout } = useUser()
     console.log(user)
 
-    // If the user is still loading, you could show a loading spinner or a fallback UI.
     if (loading || !user || !user.role) {
         return <ClientNavbar/>
     }

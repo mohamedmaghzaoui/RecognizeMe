@@ -55,6 +55,7 @@ SESSION_COOKIE_SAMESITE = 'None'
 SESSION_COOKIE_SECURE = True  # required for SameSite=None to work
 
 
+APPEND_SLASH = True
 
 
 
