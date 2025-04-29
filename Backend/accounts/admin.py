@@ -23,7 +23,13 @@ class CustomUserAdmin(UserAdmin):
     list_display = ['username', 'email', 'first_name', 'last_name', 'role', 'is_active', 'is_staff']  # Fields to display
     search_fields = ['username', 'email']  # Fields to search
     ordering = ['username']  # Order users by username
-    fieldsets = UserAdmin.fieldsets  # Inherit the default UserAdmin fieldsets
+  # Add 'role' field in the user admin add/edit pages
+    fieldsets = UserAdmin.fieldsets + (
+        (None, {'fields': ('role',)}),  # Add the 'role' field to the fieldsets
+    )
+    add_fieldsets = UserAdmin.add_fieldsets + (
+        (None, {'fields': ('role',)}),  # Add the 'role' field to the add_fieldsets
+    )
     add_fieldsets = UserAdmin.add_fieldsets  # Inherit the default UserAdmin add_fieldsets
 
 # Register models in admin

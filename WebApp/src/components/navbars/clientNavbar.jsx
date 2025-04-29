@@ -1,9 +1,8 @@
 import { Link } from 'react-router-dom';
 
 import { useState } from 'react';
-import { Login } from '../pages/login/login';
-import { SignUpPopUp } from '../pages/signUp/signPopUp';
-export const Navbar=()=>{
+import { Login } from '../../pages/login/login';
+export const ClientNavbar=()=>{
     //login and sign pop ups states
     const [isLogin,setIsLogin]= useState(false)
     // const [isSignUp,setIsSignUp]=useState(false)
@@ -34,7 +33,7 @@ export const Navbar=()=>{
           <button onClick={() => setIsLogin(true)} className='btn btn-success'>Connexion</button>
         </li>
         <li className="nav-item ms-5">
-          <button onClick={() => setIsLogin(true)} className='btn btn-primary'>Aide</button>
+          <button  className='btn btn-primary'>Aide</button>
         </li>
         {/* <li onClick={() => setIsSignUp(true)} className="nav-item mx-5">
           <button className='btn btn-success'>Inscription</button>

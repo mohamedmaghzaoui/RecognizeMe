@@ -5,15 +5,33 @@ from rest_framework.permissions import AllowAny, IsAuthenticated,IsAdminUser
 from django.contrib.auth import get_user_model
 from .serializers import RegisterSerializer, UserSerializer
 import logging
+from schools.permissions import IsSchoolAdmin
+from .models import TeacherProfile ,StudentProfile
 
 
 logger = logging.getLogger(__name__)
+User = get_user_model()
 
-# Register view
+# Register view : add a new teacher or student (only for school admin)
 class RegisterView(generics.CreateAPIView):
-    queryset = get_user_model().objects.all()
+    queryset = User.objects.all()
     serializer_class = RegisterSerializer
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated, IsSchoolAdmin]
+
+    def perform_create(self, serializer):
+        # get admin user
+        admin_user = self.request.user
+
+        # create new user
+        user = serializer.save()
+
+        # associate new user with the same school as the admin
+        school = admin_user.adminprofile.school
+        # fill user profile table
+        if user.role == "teacher":
+            TeacherProfile.objects.create(user=user, school=school)
+        elif user.role == "student":
+            StudentProfile.objects.create(user=user, school=school)
 
 # Login view
 class LoginView(generics.GenericAPIView):
@@ -36,12 +54,23 @@ class LoginView(generics.GenericAPIView):
 
         return Response({'error': 'Invalid credentials'}, status=status.HTTP_400_BAD_REQUEST)
 
-# get all Users 
+# get all students and teacher that belong to same school (only for school admin user)
 class UserListView(generics.ListAPIView):
-    permission_classes = [IsAdminUser]
-    queryset = get_user_model().objects.all()
+    permission_classes = [IsAuthenticated, IsSchoolAdmin]
     serializer_class = UserSerializer
-# return authenticated user
+
+    def get_queryset(self):
+        admin_user = self.request.user
+        admin_school = admin_user.adminprofile.school  # assumes admin has profile with school
+
+        # Get both student and teacher user IDs in the same school
+        student_ids = StudentProfile.objects.filter(school=admin_school).values_list('user_id', flat=True)
+        teacher_ids = TeacherProfile.objects.filter(school=admin_school).values_list('user_id', flat=True)
+
+        user_ids = list(student_ids) + list(teacher_ids)
+        return User.objects.filter(id__in=user_ids)
+
+# return authenticated user (only for authenticated users)
 class UserView(generics.RetrieveAPIView):
     permission_classes = [IsAuthenticated]
     serializer_class=UserSerializer

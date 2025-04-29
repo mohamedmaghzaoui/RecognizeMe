@@ -1,9 +1,12 @@
 import { useState } from "react";
 import axios from "axios";
 import "./login.css";
+import { useUser } from "../../context/context";
 
 export const LoginForm = ({ setIsLogin, role }) => {
   const [username, setUsername] = useState("");
+  const { refetch } = useUser(); 
+
   const [password, setPassword] = useState("");
   const apiUrl = import.meta.env.VITE_API_URL;
 
@@ -26,12 +29,14 @@ export const LoginForm = ({ setIsLogin, role }) => {
         }
       );
 
-      setLoading(false); // Hide the spinner once the request is complete
+      
 
       if (response.status === 200) {
         console.log("Login successful:", response.data);
-        // Handle successful login (e.g., redirect or store authentication data)
-      } else {
+        await refetch();  // Trigger React Query to fetch user again
+        setIsLogin(false); // Hide login only after successful login
+      }
+      else {
         console.error("Login failed:", response.data);
         // Handle login failure (e.g., show error message)
       }

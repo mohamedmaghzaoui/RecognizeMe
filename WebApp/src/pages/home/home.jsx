@@ -32,9 +32,7 @@ export const Home = () => {
       <section className="mb-5">
         <h3 className="text-center text-info">Calendrier des Sessions</h3>
         <p className="text-center text-muted">Visualisez vos cours et vos sessions programmées.</p>
-        <div className="d-flex justify-content-center">
-          <Calendar />
-        </div>
+        
       </section>
 
       {/* Mobile App Promotion */}

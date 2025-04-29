@@ -50,6 +50,9 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:5173',  
 ]
 CORS_ALLOW_CREDENTIALS = True
+# For session cookie over cross-origin
+SESSION_COOKIE_SAMESITE = 'None'
+SESSION_COOKIE_SECURE = True  # required for SameSite=None to work
 
 
 

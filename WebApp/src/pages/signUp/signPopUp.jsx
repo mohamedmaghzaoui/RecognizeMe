@@ -1,19 +1,14 @@
 import "./../login/login.css";
 import { SignForm } from "./signForm";
 import { Roles } from "./roles";
-import { useState } from "react";
+// import { useState } from "react";
 export const SignUpPopUp = ({ setIsSignUp }) => {
-  const [currentForm, setCurrentForm] = useState("roles");
-  const [role, setRole] = useState("");
+  // const [currentForm, setCurrentForm] = useState("roles");
+  // const [role, setRole] = useState("");
 
-  const handleRoleSelect = (selectedRole) => {
-    setRole(selectedRole);
-    setCurrentForm("signup");
-  };
+  // const handleRoleSelect = (selectedRole) => {
+  //   setRole(selectedRole);
+  //   setCurrentForm("signup");
+  // };
 
-  return currentForm === "roles" ? (
-    <Roles setRole={handleRoleSelect} />
-  ) : (
-    <SignForm setIsSignUp={setIsSignUp} role={role} />
-  );
-};
+return <SignForm setIsSignUp={setIsSignUp}/>}
