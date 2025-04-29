@@ -26,13 +26,14 @@ class RegisterSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     school_name = serializers.SerializerMethodField()
     school_address = serializers.SerializerMethodField()
+    classroom_name = serializers.SerializerMethodField()  # 👈 New field
 
     class Meta:
         model = User
-        fields = ['id', 'username', 'email', 'first_name', 'last_name', 'role', 'school_name', 'school_address']
+        fields = ['id', 'username', 'email', 'first_name', 'last_name', 'role',
+                  'school_name', 'school_address', 'classroom_name']  # 👈 Include new field
 
     def get_school_name(self, obj):
-        """Dynamically get the school name based on the user profile."""
         if hasattr(obj, 'adminprofile'):
             return obj.adminprofile.school.name
         elif hasattr(obj, 'teacherprofile'):
@@ -42,11 +43,15 @@ class UserSerializer(serializers.ModelSerializer):
         return None
 
     def get_school_address(self, obj):
-        """Dynamically get the school address based on the user profile."""
         if hasattr(obj, 'adminprofile'):
             return obj.adminprofile.school.address
         elif hasattr(obj, 'teacherprofile'):
             return obj.teacherprofile.school.address
         elif hasattr(obj, 'studentprofile'):
             return obj.studentprofile.school.address
+        return None
+
+    def get_classroom_name(self, obj):
+        if hasattr(obj, 'studentprofile') and obj.studentprofile.classroom_id:
+            return obj.studentprofile.classroom.name
         return None

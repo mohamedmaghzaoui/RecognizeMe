@@ -31,7 +31,10 @@ class SessionViewSet(viewsets.ModelViewSet):
         user = self.request.user
         if user.role == 'teacher':
             try:
-                classroom = Classroom.objects.get(teacher=user)
+                classroom = Classroom.objects.filter(teacher=user).first()
+                if not classroom:
+                    raise ValidationError("This teacher is not assigned to any classroom.")
+
             except Classroom.DoesNotExist:
                 raise ValidationError("This teacher is not assigned to any classroom.")
 

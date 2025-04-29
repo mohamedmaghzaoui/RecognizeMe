@@ -35,6 +35,7 @@ export const Admin = () => {
 
   const teachers = users.filter((u) => u.role === "teacher");
   const students = users.filter((u) => u.role === "student");
+  console.log("students",students)
 
   // Set default teacher if there are teachers available
   useEffect(() => {
@@ -143,7 +144,9 @@ export const Admin = () => {
               <ul className="list-group">
                 {students.map((s) => (
                   <li key={s.id} className="list-group-item d-flex justify-content-between align-items-center">
-                    {s.username} ({s.email})
+                    {s.username} ({s.email}) 
+                    <br/>
+                    {s.classroom_name}
                     <div>
                       <button className="btn btn-sm btn-warning me-2"><FaEdit /></button>
                       <button className="btn btn-sm btn-danger"><FaTrash /></button>

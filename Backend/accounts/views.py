@@ -79,7 +79,6 @@ class UserView(generics.RetrieveAPIView):
     
 
 
-
 class LogoutView(generics.GenericAPIView):
     permission_classes = [IsAuthenticated]
 

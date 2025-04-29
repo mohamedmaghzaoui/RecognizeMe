@@ -31,7 +31,7 @@ export const TeacherNavbar=({logout})=>{
         
 
         <li className="nav-item offset-4 ">
-          <button onClick={() => logout()} className='btn btn-danger'>dangereconnexion</button>
+          <button onClick={() => logout()} className='btn btn-danger'>deconnexion</button>
         </li>
     
     
