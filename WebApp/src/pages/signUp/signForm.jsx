@@ -35,7 +35,7 @@ export const SignForm=({setIsSignUp})=>{
       }
       else {
         console.error("Register failed:", response.data);
-        // Handle login failure (e.g., show error message)
+        // Handle login failure 
       }
     } catch (error) {
       setLoading(false); // Hide the spinner if an error occurs
@@ -152,7 +152,7 @@ export const SignForm=({setIsSignUp})=>{
     className="form-control"
     name="role"
     id="role"
-    onChange={handleChange} // <-- Fix here
+    onChange={handleChange} 
   >
     <option value="">Sélectionnez un rôle</option>
     <option value="student">Etudiant</option>

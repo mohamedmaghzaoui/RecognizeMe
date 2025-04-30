@@ -7,7 +7,7 @@ from django.http import JsonResponse
 from attendance.models import Attendance
 from schools.permissions import IsSchoolAdmin
 
-# Load models (ensure paths are correct relative to where you run the app)
+# Load models 
 presence_model = joblib.load('ai/models/predictor.pkl')
 vectorizer, kmeans = joblib.load('ai/models/nlp_cluster.pkl')
 

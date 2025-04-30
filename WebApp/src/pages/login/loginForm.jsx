@@ -38,7 +38,7 @@ export const LoginForm = ({ setIsLogin, role }) => {
       }
       else {
         console.error("Login failed:", response.data);
-        // Handle login failure (e.g., show error message)
+        // Handle login failure 
       }
     } catch (error) {
       setLoading(false); // Hide the spinner if an error occurs

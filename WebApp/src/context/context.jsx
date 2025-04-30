@@ -51,7 +51,7 @@ const logoutUser = async () => {
   const {
     data: user,
     error,
-    refetch, // This will allow us to manually trigger a refetch
+    refetch, //  manually trigger a refetch
   } = useQuery({
     queryKey: ["user"],
     queryFn: fetchUser,

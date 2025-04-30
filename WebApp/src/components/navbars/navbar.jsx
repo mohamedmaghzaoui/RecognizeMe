@@ -17,7 +17,7 @@ export const Navbar = () => {
 
 
 
-    // Now render the appropriate navbar based on the user role
+    // render the appropriate navbar based on the user role
     switch (user.role) {
         case "admin":
             return <AdminNavbar logout={logout} />

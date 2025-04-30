@@ -1,6 +1,6 @@
 # schools/permissions.py
 from rest_framework.permissions import BasePermission
-from accounts.models import AdminProfile  # Assuming you have an AdminProfile model linking admin to schools
+from accounts.models import AdminProfile  
 
 class IsSuperUser(BasePermission):
     def has_permission(self, request, view):

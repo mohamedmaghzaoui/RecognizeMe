@@ -26,7 +26,7 @@ class RegisterSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     school_name = serializers.SerializerMethodField()
     school_address = serializers.SerializerMethodField()
-    classroom_name = serializers.SerializerMethodField()  # 👈 New field
+    classroom_name = serializers.SerializerMethodField()  #  New field
 
     class Meta:
         model = User

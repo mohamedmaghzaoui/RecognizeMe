@@ -16,7 +16,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <Router> {/* Router OUTSIDE UserProvider */}
-        <UserProvider> {/* Now UserProvider is inside Router */}
+        <UserProvider> {/* UserProvider is inside Router */}
           <Navbar />
           <Routes>
             <Route path="/" element={<Home />} />

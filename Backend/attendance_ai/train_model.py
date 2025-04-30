@@ -16,7 +16,7 @@ df['target'] = df['status'].map({'present': 0, 'late': 1, 'absent': 2})
 # Task 1: Predict Absent (Binary classification)
 df['is_absent'] = (df['status'] == 'absent').astype(int)
 
-# Features (can expand this later)
+# Features 
 features = ['student_id', 'weekday', 'month', 'hour']
 X = df[features]
 y = df['is_absent']
@@ -50,7 +50,7 @@ print(text_patterns.head())
 # Check for empty or invalid patterns
 print(f"Missing or Empty Patterns: {text_patterns[text_patterns['pattern_text'].isnull() | (text_patterns['pattern_text'] == '')]}")
 
-# Optional: Clean up invalid or empty patterns (if any)
+# Clean up invalid or empty patterns (if any)
 text_patterns['pattern_text'] = text_patterns['pattern_text'].fillna('')
 
 # NLP feature extraction (no stop words and avoid empty documents)
