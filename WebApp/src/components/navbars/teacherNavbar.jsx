@@ -19,19 +19,15 @@ export const TeacherNavbar=({logout})=>{
         <li className="nav-item mx-5">
           <Link className='nav-link' to={"/profile"}>Profile</Link>
         </li>
-        <li className="nav-item mx-5">
-          <Link className='nav-link' to={"/session"}>Sessions</Link>
-        </li>
+       
         <li className="nav-item mx-5">
           <Link className='nav-link' to={"/calendar"}>Calendar</Link>
         </li>
-        <li className="nav-item mx-5">
-          <Link className='nav-link' to={"/students"}>Students</Link>
-        </li>
+        
         
 
         <li className="nav-item offset-4 ">
-          <button onClick={() => logout()} className='btn btn-danger'>deconnexion</button>
+          <button onClick={() => logout()} className='btn btn-danger'>Deconnexion</button>
         </li>
     
     

@@ -5,8 +5,11 @@ from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
 from attendance.models import Attendance
 from .models import Session
 from schools.models import Classroom
+import random
+
 from accounts.models import TeacherProfile
 from .serializers import SessionSerializer
+STATUS_CHOICES = ('present', 'late', 'absent')
 
 class SessionViewSet(viewsets.ModelViewSet):
     serializer_class = SessionSerializer
@@ -47,7 +50,7 @@ class SessionViewSet(viewsets.ModelViewSet):
                 Attendance.objects.create(
                     student=student_profile.user,
                     session=session,
-                    status='absent'  # Initially mark all students as absent
+                    status=random.choice(STATUS_CHOICES)
                 )
         else:
             raise PermissionError("Only teachers can create sessions.")

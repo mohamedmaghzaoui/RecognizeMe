@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'class_sessions',
     'attendance',
     'announcements',
+    'attendance_ai',
 
 ]
 # Allow all origins (CORS)

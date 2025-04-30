@@ -1,8 +1,11 @@
 import { useState } from "react";
 import axios from "axios";
+
 export const SignForm=({setIsSignUp})=>{
   const apiUrl = import.meta.env.VITE_API_URL;
+  
   const [loading, setLoading] = useState(false); // To manage the spinner visibility
+
 
   const AddUser = async (e) => {
     
@@ -28,6 +31,7 @@ export const SignForm=({setIsSignUp})=>{
 
         console.log("Register user successful:", response.data);
         setIsSignUp(false); // Hide login only after successful login
+        window.location.reload(); // forces page reload
       }
       else {
         console.error("Register failed:", response.data);

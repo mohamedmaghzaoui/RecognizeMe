@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import {SignUpPopUp} from "../../pages/signUp/signPopUp" 
 export const StudentNavbar=({logout})=>{
+  
     
     const [isSignUp,setIsSignUp]=useState(false)
     
@@ -20,12 +21,12 @@ export const StudentNavbar=({logout})=>{
           <Link className='nav-link' to={"/profile"}>Profile</Link>
         </li>
         <li className="nav-item mx-5">
-          <Link className='nav-link' to={"/"}>Calendar</Link>
+          <Link className='nav-link' to={"/calendar"}>Calendar</Link>
         </li>
         
        
         <li className="nav-item offset-10 ">
-          <button onClick={() => logout()} className='btn btn-danger'>deconnexion</button>
+          <button onClick={() => logout()} className='btn btn-danger'>Deconnexion</button>
         </li>
     
     

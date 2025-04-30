@@ -6,6 +6,7 @@ urlpatterns = [
     path('api/accounts/', include('accounts.urls')),
     path('api/',include('schools.urls')),
     path('api/', include('class_sessions.urls')),
+    path('api/attendance/', include('attendance_ai.urls')),
 
     # path('api/class-sessions/', include('class_sessions.urls')),
     # path('api/attendance/', include('attendance.urls')),

@@ -1,12 +1,14 @@
 from django.contrib.auth import authenticate, login, logout
 from rest_framework import status, generics
 from rest_framework.response import Response
+from django.shortcuts import get_object_or_404
 from rest_framework.permissions import AllowAny, IsAuthenticated,IsAdminUser
 from django.contrib.auth import get_user_model
 from .serializers import RegisterSerializer, UserSerializer
 import logging
 from schools.permissions import IsSchoolAdmin
 from .models import TeacherProfile ,StudentProfile
+from schools.models import Classroom
 
 
 logger = logging.getLogger(__name__)
@@ -86,3 +88,69 @@ class LogoutView(generics.GenericAPIView):
     def post(self, request):
         logout(request)
         return Response({"message": "Logged out successfully"}, status=status.HTTP_200_OK)
+class DeleteUserView(generics.DestroyAPIView):
+    permission_classes = [IsAuthenticated, IsSchoolAdmin]
+
+    def get_object(self):
+        # Get user ID from the URL and fetch the user object
+        user_id = self.kwargs.get('user_id')
+        user = get_object_or_404(User, id=user_id)
+
+        # Ensure both the admin and the user to be deleted belong to the same school
+        admin_user = self.request.user
+        admin_school = admin_user.adminprofile.school
+        
+        # Check if the user is a teacher or student
+        if hasattr(user, 'teacherprofile'):
+            user_school = user.teacherprofile.school
+        elif hasattr(user, 'studentprofile'):
+            user_school = user.studentprofile.school
+        else:
+            raise Exception("User profile not found.")
+        
+        if admin_school != user_school:
+            raise PermissionError("You can only delete users from your school.")
+
+        return user
+
+    def delete(self, request, *args, **kwargs):
+        user_to_delete = self.get_object()
+
+        # Perform the actual delete operation
+        user_to_delete.delete()
+        
+        return Response({"message": "User deleted successfully."}, status=status.HTTP_204_NO_CONTENT)
+
+
+class AssignStudentToClassView(generics.UpdateAPIView):
+    permission_classes = [IsAuthenticated, IsSchoolAdmin]
+    
+    # We use the PATCH method for updating the student’s classroom
+    def patch(self, request, *args, **kwargs):
+        student_id = kwargs.get('student_id')
+        classroom_id = request.data.get('classroom_id')
+
+        # Ensure the student ID and classroom ID are provided
+        if not classroom_id:
+            return Response({"error": "Classroom ID is required."}, status=status.HTTP_400_BAD_REQUEST)
+        
+        # Ensure the student exists
+        student_profile = get_object_or_404(StudentProfile, user_id=student_id)
+        
+        # Ensure the classroom exists
+        classroom = get_object_or_404(Classroom, id=classroom_id)
+        
+        # Ensure both the admin and the student belong to the same school
+        admin_user = self.request.user
+        admin_school = admin_user.adminprofile.school
+
+        if student_profile.school != admin_school:
+            return Response({"error": "You can only assign students from your school."}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Update student profile's classroom
+        student_profile.classroom = classroom
+        student_profile.save()
+
+        return Response({
+            "message": f"Student {student_profile.user.username} has been assigned to {classroom.name}."
+        }, status=status.HTTP_200_OK)

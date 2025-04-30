@@ -1,6 +1,7 @@
 import { createContext, useContext, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import { useNavigate } from "react-router-dom"; 
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
@@ -11,6 +12,7 @@ const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
   const [loading,setLoading]=useState(true)
+  const navigate = useNavigate(); // <-- Use navigate hook
 
   // Fetch user from Django server
 const fetchUser = async () => {
@@ -64,6 +66,7 @@ const logoutUser = async () => {
     try {
       // Call logout API to invalidate the session
       await logoutUser();
+      navigate("/")
       
       // Immediately refetch the user data after logging out
       refetch(); // trigger a fresh fetch of the user data

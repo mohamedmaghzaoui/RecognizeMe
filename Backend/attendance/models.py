@@ -2,6 +2,7 @@ from django.db import models
 from class_sessions.models import Session
 from accounts.models import User
 
+
 class Attendance(models.Model):
     STATUS_CHOICES = (
         ('present', 'Present'),

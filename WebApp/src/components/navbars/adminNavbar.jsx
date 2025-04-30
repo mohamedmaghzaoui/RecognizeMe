@@ -20,10 +20,14 @@ export const AdminNavbar=({logout})=>{
           <Link className='nav-link' to={"/profile"}>Profile</Link>
         </li>
         
+        <li className="nav-item mx-5">
+          <Link className='nav-link' to={"/predict"}>Predict</Link>
+        </li>
+        
         <li className="nav-item offset-10 col-5">
           <button onClick={() => setIsSignUp(true)} className='btn btn-success '>Ajouter un utilisateur</button>
         </li>
-        <li className="nav-item offset-10 ">
+        <li className="nav-item offset-1 ">
           <button onClick={() => logout()} className='btn btn-danger'>deconnexion</button>
         </li>
     

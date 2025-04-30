@@ -26,7 +26,7 @@ export const MainCalendar = () => {
         case "student":
             return <StudentCalendar  logout={logout}/>
         default:
-            return <StudentCalendar />
+            return <div>no data</div>
     }
    
 }
